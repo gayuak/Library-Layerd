@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="homeContext" prefHeight="700.0" prefWidth="1185.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.library.controller.HomeFormController">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="915.0" layoutX="270.0" opacity="0.6">
+         <image>
+            <Image url="@../assets/img6.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="centernode" layoutX="270.0" prefHeight="700.0" prefWidth="915.0" style="-fx-background-color: #0025;" />
+      <AnchorPane layoutX="18.0" layoutY="8.0" prefHeight="682.0" prefWidth="234.0" style="-fx-background-color: #0023;">
+         <children>
+            <Button layoutX="41.0" layoutY="642.0" mnemonicParsing="false" onAction="#closeonaction" prefHeight="33.0" prefWidth="154.0" style="-fx-background-color: #322C2B;" text="Log out" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+      <Button fx:id="btnHome" layoutX="63.0" layoutY="201.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #76453B;" text="Home">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClient" layoutX="64.0" layoutY="258.0" mnemonicParsing="false" onAction="#btnClinetOnAction" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #76453B;" text="Customer">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBooks" layoutX="63.0" layoutY="317.0" mnemonicParsing="false" onAction="#btnBooksOnAction" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #76453B;" text="Books">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnReservation" layoutX="64.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnreservationOnAction" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #76453B;" text="Reservation">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="46.0" layoutY="32.0" text="WELCOME!">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" layoutX="27.0" layoutY="107.0" text="Date:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="time" layoutX="26.0" layoutY="145.0" text="Time:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnReservation1" layoutX="64.0" layoutY="446.0" mnemonicParsing="false" onAction="#btnresceivedOnAction" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #76453B;" text="Received">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnReservation11" layoutX="64.0" layoutY="510.0" mnemonicParsing="false" onAction="#btnfinsOnAction" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #76453B;" text="Fines">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

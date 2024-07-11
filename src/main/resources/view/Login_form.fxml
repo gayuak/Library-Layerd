@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.CubicCurve?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNodeLogin" prefHeight="706.0" prefWidth="1208.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.library.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="588.0" layoutX="-9.0" layoutY="-1.0" opacity="0.89">
+         <image>
+            <Image url="@../assets/img_2.jpg" />
+         </image>
+      </ImageView>
+      <CubicCurve fx:id="curve" controlX1="-140.5070037841797" controlX2="102.74983978271484" controlY1="-221.73388671875" controlY2="-166.13943481445312" endX="50.781558990478516" endY="140.14657592773438" layoutX="951.0" layoutY="324.0" onMouseExited="#rootOnMouseExited" onMouseMoved="#rootOnMouseMove" opacity="0.12" rotate="-14.0" startX="-215.6734161376953" startY="54.02522659301758" stroke="BLACK" strokeWidth="0.0" AnchorPane.leftAnchor="734.8265838623047" AnchorPane.rightAnchor="197.7184295654297">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.2606635071090047" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3530701696872711" green="0.6068713665008545" blue="0.8289473652839661" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.11409395973154363">
+                     <color>
+                        <Color red="0.3530701696872711" green="0.6068713665008545" blue="0.8289473652839661" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7407407164573669" green="0.874691367149353" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </CubicCurve>
+      <ImageView fitHeight="705.0" fitWidth="628.0" layoutX="579.0" layoutY="-1.0" opacity="0.19">
+         <image>
+            <Image url="@../assets/img_3.png" />
+         </image>
+      </ImageView>
+      <Button id="blue" fx:id="btnLogin" layoutX="746.0" layoutY="492.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="275.0" style="-fx-background-color: #E4C59E;" text="LOGIN" textFill="#322c2b">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtGmail" layoutX="731.0" layoutY="342.0" onAction="#txtGmailOnAction" onKeyTyped="#txtGmailKeyTyped" prefHeight="40.0" prefWidth="310.0" promptText="UserId" style="-fx-border-color: #A79277; -fx-border-width: 0 0 2 5; -fx-background-color: white;">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="1012.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/user.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="txtpasswordF" layoutX="731.0" layoutY="407.0" onAction="#txtPasswordOnAction" prefHeight="40.0" prefWidth="310.0" promptText="Password" style="-fx-border-width: 0 0 2 5; -fx-border-color: #A79277; -fx-background-color: white;">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </PasswordField>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1012.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/password.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="hypPasswordForgrt" layoutX="815.0" layoutY="568.0" onAction="#hypPasswordForgrtOnAction" text="Forget your Password ?" textFill="#503c3c">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="623.0" layoutY="155.0" style="-fx-background-color: EDFAFE;" text="Don't have an Accunt?" textFill="#322c2b">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="hypCeateAccunt" layoutX="803.0" layoutY="149.0" onAction="#hypCeateAccuntOnAction" prefHeight="33.0" prefWidth="131.0" text="Create an Accunt" textFill="#322c2b">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Hyperlink>
+      <Label fx:id="txtLIBRARY" layoutX="760.0" layoutY="45.0" onDragDetected="#txtLIBRARYOnAction" text="LIBRARY" textFill="#b67352">
+         <font>
+            <Font name="System Bold" size="41.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="859.0" layoutY="103.0" startX="-100.0" stroke="#322c2b" strokeWidth="5.0" />
+   </children>
+</AnchorPane>

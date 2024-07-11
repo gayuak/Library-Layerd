@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="915.0" style="-fx-background-image: #EEEDEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.library.controller.FinesFormController">
+   <children>
+      <AnchorPane prefHeight="84.0" prefWidth="918.0" style="-fx-background-color: #A79277;">
+         <children>
+            <Label layoutX="26.0" layoutY="25.0" text="Fines">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="328.0" layoutY="98.0" prefHeight="42.0" prefWidth="330.0" text="FINES FORM" textFill="#222831">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblOrderCart" layoutX="24.0" layoutY="172.0" prefHeight="447.0" prefWidth="871.0" style="-fx-background-color: #EAD8C0 #EAD8C0;">
+         <columns>
+            <TableColumn fx:id="colpay" minWidth="50.0" prefWidth="191.0" style="-fx-background-color: #AF8260;" text="Fines Id" />
+            <TableColumn fx:id="colorder" prefWidth="215.0" style="-fx-background-color: #AF8260;" text="Order Id" />
+            <TableColumn fx:id="colamount" prefWidth="251.0" style="-fx-background-color: #AF8260;" text="Amount" />
+            <TableColumn fx:id="cusid" prefWidth="213.0" style="-fx-background-color: #AF8260;" text="Customer Id" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
