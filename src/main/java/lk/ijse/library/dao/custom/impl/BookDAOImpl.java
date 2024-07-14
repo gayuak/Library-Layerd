@@ -29,7 +29,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public boolean delete(String Id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("DELETE FROM Book WHERE bookId = ?");
+        return SQLUtil.execute("DELETE FROM Book WHERE bookId = ?",Id);
     }
 
     @Override
@@ -73,17 +73,17 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book exist(String id) throws SQLException, ClassNotFoundException {
-      ResultSet resultSet =  SQLUtil.execute("SELECT * FROM Book WHERE bookId = ?");
-        Book book = null;
-        if (resultSet.next()) {
+      ResultSet resultSet =  SQLUtil.execute("SELECT * FROM Book WHERE bookId = ?",id);
+
+        resultSet.next();
             String bookId = resultSet.getString(1);
             String bookName = resultSet.getString(2);
             String catagoryId = resultSet.getString(3);
             double price = resultSet.getDouble(4);
             int qty = Integer.parseInt(resultSet.getString(5));
 
-            book = new Book(bookId, bookName, catagoryId,price, qty);
-        }
+           Book book = new Book(bookId, bookName, catagoryId,price, qty);
+
         return book;
     }
 }

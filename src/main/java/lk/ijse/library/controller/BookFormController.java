@@ -13,6 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.library.bo.BOFactory;
+import lk.ijse.library.bo.custom.BookBO;
 import lk.ijse.library.dto.BookDTO;
 import lk.ijse.library.view.tdm.BookTm;
 
@@ -56,6 +58,7 @@ public class BookFormController {
 
     @FXML
     private TextField txtUnitPrice;
+    BookBO bookBO = (BookBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOK);
 
     private List<BookDTO> bookList = new ArrayList<>();
 
@@ -71,7 +74,7 @@ public class BookFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = CatagoryRepo.getIds();
+            List<String> idList = bookBO.getCatagoryIds();
 
             for (String id : idList) {
                 obList.add(id);
@@ -79,6 +82,8 @@ public class BookFormController {
             txtCatagory.setItems(obList);
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -106,8 +111,10 @@ public class BookFormController {
     private List<BookDTO> getAllBooks() {
         List<BookDTO> bookList = null;
         try {
-            bookList = BookRepo.getAll();
+            bookList = bookBO.getAllBook();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return bookList;
@@ -123,12 +130,14 @@ public class BookFormController {
 
         BookDTO book = new BookDTO(bookId, bookName, (String) txtCatagory.getValue(), priceText, qty);
         try {
-            boolean isSaved = BookRepo.save(book);
+            boolean isSaved = bookBO.save(book);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "book saved!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -138,12 +147,14 @@ public class BookFormController {
         String bookId = txtCode.getText();
 
         try {
-            boolean isDeleted = BookRepo.delete(bookId);
+            boolean isDeleted = bookBO.deleteBook(bookId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "book deleted!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -159,12 +170,14 @@ public class BookFormController {
         BookDTO book = new BookDTO(bookId, bookName, (String) txtCatagory.getValue(), price, qty);
 
         try {
-            boolean isUpdated = BookRepo.update(book);
+            boolean isUpdated = bookBO.updateBook(book);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "book updated!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -183,7 +196,7 @@ public class BookFormController {
         String id = txtCode.getText();
 
         try {
-            BookDTO book = BookRepo.searchById(id);
+            BookDTO book = bookBO.searchById(id);
 
             if (book != null) {
                 txtCode.setText(book.getBookId());
@@ -193,6 +206,8 @@ public class BookFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -10,6 +10,8 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.library.bo.BOFactory;
+import lk.ijse.library.bo.custom.ReservationBO;
 import lk.ijse.library.db.DBConnection;
 import lk.ijse.library.dto.*;
 import lk.ijse.library.view.tdm.CartTm;
@@ -52,6 +54,8 @@ public class ReservationFormController {
     private double netTotal = 0;
     private TableColumnBase<Object, Object> colTotal;
 
+    ReservationBO reservationBO = (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION);
+
     public void initialize() {
         setCellValueFactory();
         loadNextOrderId();
@@ -72,8 +76,10 @@ public class ReservationFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
         List<String> codeList = null;
         try {
-            codeList = BookRepo.getCodes();
+            codeList = reservationBO.getBookCodes();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         for (String code : codeList) {
@@ -88,7 +94,7 @@ public class ReservationFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = CustomerRepo.getIds();
+            List<String> idList = reservationBO.getCustomerId();
 
             for (String id : idList) {
                 obList.add(id);
@@ -97,17 +103,21 @@ public class ReservationFormController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
 
     private void loadNextOrderId() {
         try {
-            String currentId = ReservationRepo.currentId();
+            String currentId = reservationBO.currentId();
             String nextId = nextId(currentId);
 
             lblOrderId.setText(nextId);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -129,7 +139,7 @@ public class ReservationFormController {
     }
 
     @FXML
-    void btnAddToCartOnAction(ActionEvent event) throws SQLException {
+    void btnAddToCartOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String code = String.valueOf(cmbItemCode.getValue());
         String value = (String) cmbCustomerId.getValue();
         String book = (String) cmbItemCode.getValue();
@@ -172,8 +182,8 @@ public class ReservationFormController {
         txtQty.setText("");
     }
 
-    private void calculateNetTotal(String book) throws SQLException {
-        BookDTO book1 = BookRepo.searchById(book);
+    private void calculateNetTotal(String book) throws SQLException, ClassNotFoundException {
+        BookDTO book1 = reservationBO.searchByBookCode(book);
         netTotal = 0;
             netTotal += book1.getPrice();
 
@@ -206,7 +216,7 @@ public class ReservationFormController {
 
         PlaceOrderDTO po = new PlaceOrderDTO(reservation, rdList);
         try {
-            boolean isPlaced = PlaceOrderRepo.placeOrder(po);
+            boolean isPlaced = reservationBO.placeOrder(po);
             if(isPlaced) {
                 printbill();
                 new Alert(Alert.AlertType.CONFIRMATION, "order placed!").show();
@@ -244,23 +254,25 @@ public class ReservationFormController {
         String cusId = String.valueOf(cmbCustomerId.getValue());
 
         try {
-            CustomerDTO customer = CustomerRepo.searchById(cusId);
+            CustomerDTO customer = reservationBO.searchByCustomerId(cusId);
 
             lblCustomerName.setText(customer.getName());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @FXML
-    void cmbItemOnAction(ActionEvent event) {
+    void cmbItemOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String code = String.valueOf(cmbItemCode.getValue());
-        BookDTO book = BookRepo.searchByCode(code);
+        BookDTO book = reservationBO.searchByBookCode(code);
         if (book != null) {
-            lblDescription.setText(book.getCatagoryId());
+           /* lblDescription.setText(book.getCatagoryId());
             lblUnitPrice.setText(String.valueOf(book.getPrice()));
-            lblQtyOnHand.setText(String.valueOf(book.getQty()));
+            lblQtyOnHand.setText(String.valueOf(book.getQty()));*/
         }
 
     }

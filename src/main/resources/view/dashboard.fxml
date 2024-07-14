@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.library.controller.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.library.controller.DashboardController">
+    <children>
+        <AnchorPane fx:id="centernode" layoutX="-1.0" layoutY="-1.0" prefHeight="700.0" prefWidth="915.0" style="-fx-background-color: #0025;">
+            <children>
+                <Label fx:id="date" alignment="CENTER" layoutX="284.0" layoutY="121.0" prefHeight="47.0" prefWidth="329.0" text="Wednesdsy, Jul 03" textFill="#fcfafa">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label fx:id="time" alignment="CENTER" layoutX="284.0" layoutY="68.0" prefHeight="46.0" prefWidth="329.0" text="13.45 am" textAlignment="RIGHT" textFill="#fffdfd">
+                    <font>
+                        <Font name="System Bold" size="39.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="337.0" layoutY="13.0" prefHeight="55.0" prefWidth="224.0" text="WELCOME!" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Ubuntu Bold" size="35.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="93.0" fitWidth="98.0" layoutX="400.0" layoutY="145.0">
+                    <image>
+                        <Image url="@../assets/Book%20Study%20Sticker%20by%20ashrafomar__%20-%20Find%20&amp;%20Share%20on%20GIPHY.gif" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="63.0" fitWidth="58.0" layoutX="800.0" layoutY="580.0">
+                    <image>
+                        <Image url="@../assets/icons8-books-50.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="86.0" layoutY="297.0" prefHeight="339.0" prefWidth="743.0" text="Public libraries serve as invaluable community hubs that offer a wide range of &#10;resources,services, and programs to people of all ages and backgrounds.&#10;&#10; These institutions play a vital rolein promoting literacy, education, cultural enrichment,&#10;and community engagementA Public Library is an institution that provides equal &#10;opportunities to every member of society togather information and knowledge freely&#10; without concerning the difference of nationality, caste,creed, or language. &#10;&#10;Public libraries provide services, such as lending books, readingnewspapers,community&#10; meeting rooms, and storytelling sessions for children.Karapitiya Library is a public library&#10; which is being used by many of the studentsas well as adults in the area." textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

@@ -24,7 +24,7 @@ public class ReceivedBOImpl implements ReceivedBO {
     @Override
     public ReservationDTO searchByReservationId(String value) throws SQLException, ClassNotFoundException {
         Reservation exist = reservationDAO.exist(value);
-        ReservationDTO reservationDTO = new ReservationDTO(exist.getReservationId(), exist.getUserId(), exist.getReseravtionDate(), exist.getBookId(), exist.getReturnDate(), exist.getReservationId());
+        ReservationDTO reservationDTO = new ReservationDTO(exist.getReservationId(), exist.getUserId(), exist.getReseravtionDate(), exist.getBookId(), exist.getReturnDate(), exist.getCId());
         return reservationDTO;
     }
 

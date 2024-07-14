@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import lk.ijse.library.bo.BOFactory;
+import lk.ijse.library.bo.custom.ReceivedBO;
 import lk.ijse.library.dto.CustomerDTO;
 import lk.ijse.library.dto.FinesDTO;
 import lk.ijse.library.dto.ReservationDTO;
@@ -50,10 +52,12 @@ public class ReceivedFormController {
         private int amount;
         private long daysBetween;
         private ReservationDTO reservation;
+
+        ReceivedBO receivedBO = (ReceivedBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RECIEVED);
         @FXML
-        void cmbCustomerOnAction(ActionEvent event) throws SQLException {
+        void cmbCustomerOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
             String value = cmbCustomerId.getValue();
-             reservation = ReservationDTO.searchById(value);
+             reservation = receivedBO.searchByReservationId(value);
             setdat(reservation);
 
         }
@@ -73,8 +77,8 @@ public class ReceivedFormController {
                 payment.setText(String.valueOf(amount));
             }
 
-    private void setdat(ReservationDTO reservation) throws SQLException {
-        CustomerDTO customer = CustomerDTO.searchById(reservation.getCId());
+    private void setdat(ReservationDTO reservation) throws SQLException, ClassNotFoundException {
+        CustomerDTO customer = receivedBO.searchByCustomerId(reservation.getCId());
         cusid.setText(customer.getId());
         cusname.setText(customer.getName());
         date.setText(String.valueOf(reservation.getReseravtionDate()));
@@ -82,10 +86,10 @@ public class ReceivedFormController {
     }
 
     @FXML
-        void payOn(ActionEvent event) throws SQLException {
+        void payOn(ActionEvent event) throws SQLException, ClassNotFoundException {
         String daysBetween1 = String.valueOf(daysBetween);
         FinesDTO fines = new FinesDTO(next,reservation.getReservationId(),daysBetween1,amount,book.getText(),"P001");
-        boolean save = FinesDTO.save(fines);
+        boolean save = receivedBO.save(fines);
         if (save){
             new Alert(Alert.AlertType.CONFIRMATION, "Payment Success!").show();
         }else {
@@ -94,9 +98,9 @@ public class ReceivedFormController {
         }
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() throws SQLException, ClassNotFoundException {
         getorders();
-        String curunt = FinesDTO.currentId();
+        String curunt = receivedBO.currentId();
          next = nextId(curunt);
         payid.setText(next);
     }
@@ -114,8 +118,10 @@ public class ReceivedFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
         List<String> codeList = null;
         try {
-            codeList = ReservationDTO.getIds();
+            codeList = receivedBO.getReservationIds();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         for (String code : codeList) {

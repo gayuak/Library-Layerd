@@ -21,7 +21,7 @@ public class FinesBOImpl implements FinesBO {
     @Override
     public ReservationDTO searchByReservationId(String Id) throws SQLException, ClassNotFoundException {
         Reservation exist = reservationDAO.exist(Id);
-        ReservationDTO reservationDTO = new ReservationDTO(exist.getReservationId(), exist.getUserId(), exist.getReseravtionDate(), exist.getBookId(), exist.getReturnDate(), exist.getReservationId());
+        ReservationDTO reservationDTO = new ReservationDTO(exist.getReservationId(), exist.getUserId(), exist.getReseravtionDate(), exist.getBookId(), exist.getReturnDate(), exist.getCId());
         return reservationDTO;
     }
 
@@ -29,6 +29,7 @@ public class FinesBOImpl implements FinesBO {
     public CustomerDTO searchByCustomerId(String reservation) throws SQLException, ClassNotFoundException {
         Customer exist = customerDAO.exist(reservation);
         CustomerDTO customerDTO = new CustomerDTO(exist.getId(), exist.getName(), exist.getContact(), exist.getAddress(), exist.getUserId());
+        System.out.println(customerDTO);
         return customerDTO;
     }
 

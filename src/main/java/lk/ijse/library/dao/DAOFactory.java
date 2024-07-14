@@ -29,7 +29,7 @@ public class DAOFactory {
             case Reservation:
                 return new ReservationDAOImpl();
             case ReservationDetail:
-                return new ReservationDAOImpl();
+                return new ReservationDetailDAOImpl();
             default:
                 return null;
         }

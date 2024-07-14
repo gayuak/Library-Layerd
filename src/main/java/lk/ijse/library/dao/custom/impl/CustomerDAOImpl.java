@@ -24,7 +24,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean delete(String Id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("SELECT * FROM Customer WHERE CId = ?");
+        return SQLUtil.execute("DELETE FROM Customer WHERE CId = ?",Id);
     }
 
     @Override
@@ -66,16 +66,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public Customer exist(String id) throws SQLException, ClassNotFoundException {
-        ResultSet resultSet =  SQLUtil.execute("SELECT * FROM Customer WHERE CId = ?");
-        Customer customer = null;
-        if (resultSet.next()) {
-            String CId = resultSet.getString(1);
-            String Cname = resultSet.getString(2);
-            String contact = resultSet.getString(3);
-            String address = resultSet.getString(4);
-            String userId = resultSet.getString(5);
+        System.out.println(id);
+        ResultSet resultSet =  SQLUtil.execute("SELECT * FROM Customer WHERE CId = ?",id);
+       resultSet.next();
+        String CId = resultSet.getString(1);
+        String Cname = resultSet.getString(2);
+        String contact = resultSet.getString(3);
+        String address = resultSet.getString(4);
+        String userId = resultSet.getString(5);
 
-            customer = new Customer(CId, Cname, contact, address, userId);
-        }
-        return customer;    }
+            Customer customer = new Customer(CId, Cname, contact, address, userId);
+
+        return customer;
+    }
 }

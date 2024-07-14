@@ -13,7 +13,7 @@ public interface ReservationBO extends SuperBO {
     List<String> getCustomerId() throws SQLException, ClassNotFoundException;
     String currentId() throws SQLException, ClassNotFoundException;
     BookDTO searchById(String book) throws SQLException, ClassNotFoundException;
-    boolean placeOrder(PlaceOrderDTO po);
-    CustomerDTO searchByCustomerId(String cusId);
-    BookDTO searchByBookCode(String code);
+    boolean placeOrder(PlaceOrderDTO po) throws SQLException;
+    CustomerDTO searchByCustomerId(String cusId) throws SQLException, ClassNotFoundException;
+    BookDTO searchByBookCode(String code) throws SQLException, ClassNotFoundException;
 }

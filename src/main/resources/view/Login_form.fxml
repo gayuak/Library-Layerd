@@ -59,7 +59,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="txtGmail" layoutX="731.0" layoutY="342.0" onAction="#txtGmailOnAction" onKeyTyped="#txtGmailKeyTyped" prefHeight="40.0" prefWidth="310.0" promptText="UserId" style="-fx-border-color: #A79277; -fx-border-width: 0 0 2 5; -fx-background-color: white;">
+      <TextField fx:id="txtGmail" layoutX="731.0" layoutY="342.0" onAction="#txtGmailOnAction" onKeyPressed="#txtGmailKeyTyped" prefHeight="40.0" prefWidth="310.0" promptText="UserId" style="-fx-border-color: #A79277; -fx-border-width: 0 0 2 5; -fx-background-color: white;">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -69,7 +69,7 @@
             <Image url="@../assets/user.png" />
          </image>
       </ImageView>
-      <PasswordField fx:id="txtpasswordF" layoutX="731.0" layoutY="407.0" onAction="#txtPasswordOnAction" prefHeight="40.0" prefWidth="310.0" promptText="Password" style="-fx-border-width: 0 0 2 5; -fx-border-color: #A79277; -fx-background-color: white;">
+      <PasswordField fx:id="txtpasswordF" layoutX="731.0" layoutY="407.0" onAction="#txtPasswordOnAction" onKeyPressed="#PasswordKeyPressed" prefHeight="40.0" prefWidth="310.0" promptText="Password" style="-fx-border-width: 0 0 2 5; -fx-border-color: #A79277; -fx-background-color: white;">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

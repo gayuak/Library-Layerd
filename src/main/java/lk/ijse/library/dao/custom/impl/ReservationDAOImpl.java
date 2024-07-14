@@ -56,9 +56,8 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
     public Reservation exist(String id) throws SQLException, ClassNotFoundException {
-        ResultSet resultSet =  SQLUtil.execute("SELECT * FROM Reservation WHERE reservationId = ?");
-        Reservation reservation = null;
-        if (resultSet.next()) {
+        ResultSet resultSet =  SQLUtil.execute("SELECT * FROM Reservation WHERE reservationId = ?",id);
+        resultSet.next();
             String CId = resultSet.getString(1);
             String Cname = resultSet.getString(2);
             Date contact = resultSet.getDate(3);
@@ -66,7 +65,7 @@ public class ReservationDAOImpl implements ReservationDAO {
             Date userId = resultSet.getDate(5);
             String userId1 = resultSet.getString(6);
 
-            reservation = new Reservation(CId,Cname,contact,address,userId,userId1);
-        }
+            Reservation reservation = new Reservation(CId,Cname,contact,address,userId,userId1);
+
         return reservation;    }
 }

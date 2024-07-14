@@ -19,6 +19,7 @@ import javafx.scene.shape.CubicCurve;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.library.db.DBConnection;
+import lk.ijse.library.util.Regex;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -123,14 +124,24 @@ public class LoginFormController {
 
     @FXML
     public void btnLoginOnAction(ActionEvent actionEvent) throws SQLException, IOException {
-         userId = txtGmail.getText();
+        userId = txtGmail.getText();
         String pw = txtpasswordF.getText();
 
         try {
-            checkCredential(userId, pw);
+            if (isValid()){
+                checkCredential(userId, pw);}else {
+                new Alert(Alert.AlertType.WARNING, "text not valied").show();
+            }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+
+    }
+
+    public boolean isValid(){
+        if (!Regex.setTextColor(lk.ijse.library.util.TextField.ID,txtGmail)) return false;
+        if (!Regex.setTextColor(lk.ijse.library.util.TextField.PASSWORD,txtpasswordF)) return false;
+        return true;
     }
 
     private void checkCredential(String userId, String pw) throws SQLException, IOException {
@@ -186,7 +197,7 @@ public class LoginFormController {
 
     @FXML
     public void txtGmailKeyTyped(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.library.util.TextField.ID,txtGmail);
     }
 
     @FXML
@@ -203,4 +214,7 @@ public class LoginFormController {
     }
 
 
+    public void PasswordKeyPressed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.library.util.TextField.PASSWORD,txtpasswordF);
+    }
 }

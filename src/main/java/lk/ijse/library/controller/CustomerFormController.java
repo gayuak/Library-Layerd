@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.library.bo.BOFactory;
+import lk.ijse.library.bo.custom.BookBO;
+import lk.ijse.library.bo.custom.CustomerBO;
 import lk.ijse.library.dto.CustomerDTO;
 import lk.ijse.library.view.tdm.CustomerTm;
 
@@ -28,6 +31,8 @@ public class CustomerFormController {
     public TextField txtId;
     public TextField txtname;
     public TextField txtAddres;
+
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
 
     public TableView <CustomerTm> custable;
     private List<CustomerDTO> customerList = new ArrayList<>();
@@ -56,8 +61,10 @@ public class CustomerFormController {
     private List<CustomerDTO> getAllCustomers() {
         List<CustomerDTO> customerList = null;
         try {
-            customerList = CustomerRepo.getAll();
+            customerList = customerBO.getAllCus();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return customerList;
@@ -77,12 +84,14 @@ public class CustomerFormController {
 
         CustomerDTO customer = new CustomerDTO(CId, Cname, contact, address, null);
         try {
-            boolean isSaved = CustomerRepo.save(customer);
+            boolean isSaved = customerBO.saveCustomer(customer);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
 
@@ -98,12 +107,14 @@ public class CustomerFormController {
         CustomerDTO customer = new CustomerDTO(CId, Cname, contact, address, contact);
 
         try {
-            boolean isUpdated = CustomerRepo.update(customer);
+            boolean isUpdated = customerBO.updateCustomer(customer);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -112,12 +123,14 @@ public class CustomerFormController {
         String id = txtId.getText();
 
         try {
-            boolean isDeleted = CustomerRepo.delete(id);
+            boolean isDeleted = customerBO.deleteCustomer(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -136,7 +149,7 @@ public class CustomerFormController {
         String id = txtId.getText();
 
         try {
-            CustomerDTO customer = CustomerRepo.searchById(id);
+            CustomerDTO customer = customerBO.searchById(id);
 
             if (customer != null) {
                 txtId.setText(customer.getId());
@@ -146,6 +159,8 @@ public class CustomerFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

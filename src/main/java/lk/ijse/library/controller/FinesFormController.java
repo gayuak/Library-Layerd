@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.library.bo.BOFactory;
+import lk.ijse.library.bo.custom.CustomerBO;
+import lk.ijse.library.bo.custom.FinesBO;
 import lk.ijse.library.dto.CustomerDTO;
 import lk.ijse.library.dto.FinesDTO;
 import lk.ijse.library.dto.ReservationDTO;
@@ -32,17 +35,23 @@ public class FinesFormController {
 
     @FXML
     private TableView<Finestm> tblOrderCart;
-    public void initialize() throws SQLException {
+    FinesBO finesBO = (FinesBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.FINES);
+
+    public void initialize()   {
         this.customerList = getAllCustomers();
         setCellValueFactory();
-        loadCustomerTable();
+        try {
+            loadCustomerTable();
+        } catch (ClassNotFoundException |SQLException e) {
+            e.printStackTrace();
+        }
     }
-    private void loadCustomerTable() throws SQLException {
+    private void loadCustomerTable() throws SQLException, ClassNotFoundException {
         ObservableList<Finestm> tmList = FXCollections.observableArrayList();
 
         for (FinesDTO customer : customerList) {
-            ReservationDTO reservation = ReservationRepo.searchById(customer.getReservationId());
-            CustomerDTO customer1 = CustomerRepo.searchById(reservation.getCId());
+            ReservationDTO reservation = finesBO.searchByReservationId(customer.getReservationId());
+            CustomerDTO customer1 = finesBO.searchByCustomerId(reservation.getCId());
             Finestm customerTm = new Finestm(
                     customer.getFinesId(),
                     customer.getReservationId(),
@@ -58,8 +67,10 @@ public class FinesFormController {
     private List<FinesDTO> getAllCustomers() {
         List<FinesDTO> customerList = null;
         try {
-            customerList = FinesRepo.getAll();
+            customerList = finesBO.getAll();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return customerList;

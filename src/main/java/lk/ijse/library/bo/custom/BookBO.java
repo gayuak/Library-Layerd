@@ -12,4 +12,5 @@ public interface BookBO extends SuperBO {
     boolean deleteBook(String bookId) throws SQLException, ClassNotFoundException;
     boolean updateBook(BookDTO book) throws SQLException, ClassNotFoundException;
     BookDTO searchById(String id) throws SQLException, ClassNotFoundException;
+    boolean save(BookDTO bookDTO) throws SQLException, ClassNotFoundException;
 }

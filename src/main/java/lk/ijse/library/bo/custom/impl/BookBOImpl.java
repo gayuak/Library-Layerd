@@ -52,4 +52,11 @@ public class BookBOImpl implements BookBO {
         BookDTO bookDTO = new BookDTO(c.getBookId(), c.getBookName(), c.getCatagoryId(), c.getPrice(), c.getQty());
         return bookDTO;
     }
+
+    @Override
+    public boolean save(BookDTO bookDTO) throws SQLException, ClassNotFoundException {
+        Book book = new Book(bookDTO.getBookId(), bookDTO.getBookName(), bookDTO.getCatagoryId(), bookDTO.getPrice(), bookDTO.getQty());
+        boolean save = bookDAO.save(book);
+        return save;
+    }
 }
